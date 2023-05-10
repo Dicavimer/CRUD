@@ -101,11 +101,31 @@ const Form = () => {
     }
 
     const Manipulador_Eventos = (elemento, estado) => {
-        setLista(elemento)
+        setuser(elemento)
         if (estado == 'editar') {
             setmodal(true)
         }
     }
+
+        const editar=()=>{
+            var nuevosdatos=lista;
+            nuevosdatos.map(newuser=>{
+              if(newuser.id===user.id){
+                newuser.nombre=user.nombre;
+                newuser.apellido=user.apellido;
+              }
+            });
+            setLista(nuevosdatos);
+            setmodal(false);
+            Swal.fire({
+                icon: 'success',
+                text: `Usuario actualizado correctamente`,
+                showCancelButton: false,
+                timer: 1500,
+                showConfirmButton: false
+            })
+          }
+    
 
     return (
         <div className='container'>
@@ -207,9 +227,7 @@ const Form = () => {
                     </div>
                 </ModalBody>
                 <ModalFooter>
-                    <button className="btn btn-primary" onClick={() => editar()}>
-                        Actualizar
-                    </button>
+                    <button className="btn btn-primary" onClick={() => editar()}>Actualizar</button>
                     <button
                         className="btn btn-danger"
                         onClick={() => setmodal(false)}
